@@ -25,7 +25,11 @@ public class OrderItem {
     private Order order;
 
     private int orderPrice;
-
     private int count;
 
+    // 비즈니스 로직 //
+    public void cancel() {
+        // 재고 수량 원복
+        getItem().addStock(count);
+    }
 }
