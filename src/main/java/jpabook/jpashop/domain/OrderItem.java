@@ -32,4 +32,9 @@ public class OrderItem {
         // 재고 수량 원복
         getItem().addStock(count);
     }
+
+    public int getTotalPrice() {
+        return getOrderPrice() * getCount();
+    }
+
 }
