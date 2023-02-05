@@ -19,6 +19,9 @@ public class Delivery {
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     private Order order;
 
+    @Embedded
+    private Address address;
+
     // EnumType은 꼭 String으로.. 중간에 밀려서 망할수도 있음
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status; // READY, COMP
