@@ -23,11 +23,11 @@ public class ItemService {
 
     // 변경 감지 기능 사용 (UPDATE)
     @Transactional
-    public void updateItem(Long itemId, Book bookParam) {
+    public void updateItem(Long itemId, String name, int price, int stockQuantity) {
         Item findItem = itemRepository.findOne(itemId); // 영속 상태
-        findItem.setPrice(bookParam.getPrice());
-        findItem.setName(bookParam.getName());
-        findItem.setStockQuantity(bookParam.getStockQuantity());
+        findItem.setName(name);
+        findItem.setPrice(price);
+        findItem.setStockQuantity(stockQuantity);
         // 이미 영속 상태라 save 호출 할 필요가 없음
     }
 
