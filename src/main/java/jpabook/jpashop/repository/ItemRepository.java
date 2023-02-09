@@ -17,8 +17,12 @@ public class ItemRepository {
         if (item.getId() == null) {
             em.persist(item);
         } else {
-            //update 느낌
-            em.merge(item);
+            // 병합(merge) 사용 (준영속 상태의 엔티티를 영속 상태로 변경)
+            // mergedItem == 영속 상태
+            // 주의: 변경 감지 기능을 사용하면 원하는 속성만 선택해서 변경할 수 있지만,
+            // 병합을 사용하면 모든 속성이 변경된다. 병합시 값이 없으면 null로 업데이트 할 위험도 있다.
+            // 병합은 모든 필드를 교체한다.
+            Item mergedItem = em.merge(item);
         }
     }
 
