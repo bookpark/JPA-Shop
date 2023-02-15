@@ -17,7 +17,8 @@ public class JpashopApplication {
 		Hibernate5Module hibernate5Module = new Hibernate5Module();
 		// 설정하지 않을 시 LAZY LOADING이 되지 않음
 		// 보통 이렇게 하지는 않음
-		hibernate5Module.configure(Hibernate5Module.Feature.FORCE_LAZY_LOADING, true);
+		// Entity 외부로 노출하면 안됨
+//		hibernate5Module.configure(Hibernate5Module.Feature.FORCE_LAZY_LOADING, true);
 		return hibernate5Module;
 	}
 
