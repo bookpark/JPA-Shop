@@ -120,8 +120,8 @@ public class OrderRepository {
         return em.createQuery(
                         "select o from Order o" +
                                 " join fetch o.member m" +
-                                " join fetch o.delivery d", Order.class
-                ).setFirstResult(offset)
+                                " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList();
     }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.aspectj.weaver.ast.Or;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -27,6 +28,7 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
+//    @BatchSize(size = 1000) // Collection에 적용
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // order가 저장되면서 orderItems도 동시에 저장
     private List<OrderItem> orderItems = new ArrayList<>();
 
