@@ -40,7 +40,7 @@ public class OrderApiController {
     }
 
     @GetMapping("/api/v2/orders")
-    public List<OrderQueryService.OrderDto> ordersV2() {
+    public List<OrderApiController.OrderDto> ordersV2() {
         return orderQueryService.ordersV2();
     }
 
@@ -86,7 +86,7 @@ public class OrderApiController {
     }
 
     @Data
-    static class OrderDto {
+    public static class OrderDto {
         private Long orderId;
         private String name;
         private LocalDateTime orderDate;
@@ -107,7 +107,7 @@ public class OrderApiController {
     }
 
     @Data
-    static class OrderItemDto {
+    public static class OrderItemDto {
         private String itemName;
         private int orderPrice;
         private int count;

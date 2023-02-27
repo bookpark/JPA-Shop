@@ -1,5 +1,6 @@
 package jpabook.jpashop.service.query;
 
+import jpabook.jpashop.api.OrderApiController;
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
@@ -22,45 +23,12 @@ import static java.util.stream.Collectors.toList;
 public class OrderQueryService {
 
     private final OrderRepository orderRepository;
-    public List<OrderQueryService.OrderDto> ordersV2() {
+
+    public List<OrderApiController.OrderDto> ordersV2() {
         List<Order> orders = orderRepository.findAllByString(new OrderSearch());
         return orders.stream()
-                .map(OrderQueryService.OrderDto::new)
+                .map(OrderApiController.OrderDto::new)
                 .collect(toList());
-    }
-
-    @Data
-    public static class OrderDto {
-        private Long orderId;
-        private String name;
-        private LocalDateTime orderDate;
-        private OrderStatus orderStatus;
-        private Address address;
-        private List<OrderQueryService.OrderItemDto> orderItems;
-
-        public OrderDto(Order order) {
-            orderId = order.getId();
-            name = order.getMember().getName();
-            orderDate = order.getOrderDate();
-            orderStatus = order.getStatus();
-            address = order.getDelivery().getAddress();
-            orderItems = order.getOrderItems().stream()
-                    .map(OrderQueryService.OrderItemDto::new)
-                    .collect(toList());
-        }
-    }
-
-    @Data
-    static class OrderItemDto {
-        private String itemName;
-        private int orderPrice;
-        private int count;
-
-        public OrderItemDto(OrderItem orderItem) {
-            itemName = orderItem.getItem().getName();
-            orderPrice = orderItem.getOrderPrice();
-            count = orderItem.getCount();
-        }
     }
 
 }
