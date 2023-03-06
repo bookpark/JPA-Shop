@@ -1,13 +1,9 @@
-buildscript {
-    dependencies {
-        classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.10")
-    }
-}
-
 plugins {
     id 'org.springframework.boot' version '2.7.5'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'java'
+    // Querydsl
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 group = 'jpabook'
@@ -18,6 +14,8 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    // Querydsl
+    querydsl.extendsFrom compileClasspath
 }
 
 repositories {
@@ -39,7 +37,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    //Querydsl 추가
+    // Querydsl
     implementation 'com.querydsl:querydsl-jpa'
     annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
     annotationProcessor "jakarta.annotation:jakarta.annotation-api"
@@ -50,8 +48,7 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-//def querydslDir = '$buildDir/generated/querydsl'
-
+// Querydsl
 sourceSets {
     main {
         java {
@@ -59,13 +56,3 @@ sourceSets {
         }
     }
 }
-
-configurations {
-    querydsl.extendsFrom compileClasspath
-}
-
-//Querydsl 추가, 자동 생성된 Q클래스 gradle clean으로 제거
-clean {
-    delete file('src/main/generated')
-}
-
